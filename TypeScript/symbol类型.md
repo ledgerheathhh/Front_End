@@ -130,21 +130,21 @@ class C {
 
 `let`命令声明的变量，推断类型为 symbol。
 
-```
+```typescript
 // 类型为 symbol
 let x = Symbol();
 ```
 
 `const`命令声明的变量，推断类型为 unique symbol。
 
-```
+```typescript
 // 类型为 unique symbol
 const x = Symbol();
 ```
 
 但是，`const`命令声明的变量，如果赋值为另一个 symbol 类型的变量，则推断类型为 symbol。
 
-```
+```typescript
 let x = Symbol();
 
 // 类型为 symbol
@@ -153,7 +153,7 @@ const y = x;
 
 `let`命令声明的变量，如果赋值为另一个 unique symbol 类型的变量，则推断类型还是 symbol。
 
-```
+```typescript
 const x = Symbol();
 
 // 类型为 symbol
