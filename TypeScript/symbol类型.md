@@ -23,7 +23,7 @@ x === y // false
 
 因为 `unique symbol`表示单个值，所以这个类型的变量是不能修改值的，只能用 `const`命令声明，不能用 `let`声明。
 
-```
+```typescript
 // 正确
 const x:unique symbol = Symbol();
 
@@ -35,7 +35,7 @@ let y:unique symbol = Symbol();
 
 `const`命令为变量赋值 Symbol 值时，变量类型默认就是 `unique symbol`，所以类型可以省略不写。
 
-```
+```typescript
 const x:unique symbol = Symbol();
 // 等同于
 const x = Symbol();
@@ -43,7 +43,7 @@ const x = Symbol();
 
 每个声明为 `unique symbol`类型的变量，它们的值都是不一样的，其实属于两个值类型。
 
-```
+```typescript
 const a:unique symbol = Symbol();
 const b:unique symbol = Symbol();
 
@@ -54,7 +54,7 @@ a === b // 报错
 
 由于 Symbol 类似于字符串，可以参考下面的例子来理解。
 
-```
+```typescript
 const a:'hello' = 'hello';
 const b:'world' = 'world';
 
@@ -65,7 +65,7 @@ a === b // 报错
 
 而且，由于变量 `a`和 `b`是两个类型，就不能把一个赋值给另一个。
 
-```
+```typescript
 const a:unique symbol = Symbol();
 const b:unique symbol = a; // 报错
 ```
@@ -74,14 +74,14 @@ const b:unique symbol = a; // 报错
 
 上例变量 `b`的类型，如果要写成与变量 `a`同一个 `unique symbol`值类型，只能写成类型为 `typeof a`。
 
-```
+```typescript
 const a:unique symbol = Symbol();
 const b:typeof a = a; // 正确
 ```
 
 不过我们知道，相同参数的 `Symbol.for()`方法会返回相同的 Symbol 值。TypeScript 目前无法识别这种情况，所以可能出现多个 unique symbol 类型的变量，等于同一个 Symbol 值的情况。
 
-```
+```typescript
 const a:unique symbol = Symbol.for('foo');
 const b:unique symbol = Symbol.for('foo');
 ```
@@ -90,7 +90,7 @@ const b:unique symbol = Symbol.for('foo');
 
 unique symbol 类型是 symbol 类型的子类型，所以可以将前者赋值给后者，但是反过来就不行。
 
-```
+```typescript
 const a:unique symbol = Symbol();
 
 const b:symbol = a; // 正确
@@ -102,7 +102,7 @@ const c:unique symbol = b; // 报错
 
 unique symbol 类型的一个作用，就是用作属性名，这可以保证不会跟其他属性名冲突。如果要把某一个特定的 Symbol 值当作属性名，那么它的类型只能是 unique symbol，不能是 symbol。
 
-```
+```typescript
 const x:unique symbol = Symbol();
 const y:symbol = Symbol();
 
@@ -116,7 +116,7 @@ interface Foo {
 
 `unique symbol`类型也可以用作类（class）的属性值，但只能赋值给类的 `readonly static`属性。
 
-```
+```typescript
 class C {
   static readonly foo:unique symbol = Symbol();
 }
